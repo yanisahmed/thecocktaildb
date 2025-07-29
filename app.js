@@ -160,7 +160,7 @@ async function implementDetailModal(drinkId) {
     const drink = data.drinks[0];
 
     if (drink) {
-        // Populate modal fields
+
         const modalContent = document.getElementById('modal-content');
         modalContent.innerHTML = `
             <span class="close-button" id="close-button">&times;</span>
