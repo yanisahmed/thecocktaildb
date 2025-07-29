@@ -20,6 +20,7 @@ searchForm.addEventListener('submit', function (event) {
 
             if (drinks) {
                 drinks.forEach(drink => {
+
                     const drinkDiv = document.createElement('div');
                     drinkDiv.classList.add('drink');
                     drinkDiv.innerHTML = `
@@ -33,6 +34,27 @@ searchForm.addEventListener('submit', function (event) {
                         </div>
                     `;
                     productContainer.appendChild(drinkDiv);
+                });
+
+                // Add event listeners after DOM elements are inserted
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const drinkId = e.target.dataset.id;
+                        console.log(`Added to cart: ${drinkId}`);
+
+                        addToCart(drinkId);
+                    });
+                });
+
+                document.querySelectorAll('.show-details').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const drinkId = e.target.dataset.id;
+                        console.log(`Show details for: ${drinkId}`);
+                        // implement detail modal
+                        implementDetailModal(drinkId);
+
+
+                    });
                 });
             } else {
                 productContainer.innerHTML = '<p>No drinks found.</p>';
@@ -67,6 +89,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             `;
             productContainer.appendChild(drinkDiv);
         });
+
+
 
         // Add event listeners after DOM elements are inserted
         document.querySelectorAll('.add-to-cart').forEach(button => {
