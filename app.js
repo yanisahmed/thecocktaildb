@@ -27,7 +27,7 @@ searchForm.addEventListener('submit', function (event) {
                         <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
                         <h3>${drink.strDrink}</h3>
                         <p><strong>Category:</strong> ${drink.strCategory}</p>
-                        <p><strong>Instructions:</strong> ${drink.strInstructions.slice(1, 30)}</p>
+                        <p><strong>Instructions:</strong> ${drink.strInstructions.slice(0, 15)}</p>
                         <div class="buttons d-flex justify-content-center">
                             <button class="add-to-cart" data-id="${drink.idDrink}">Add to Cart</button>
                             <button class="show-details" data-id="${drink.idDrink}">Show Details</button>
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                 <img src="${drink.strDrinkThumb}" alt="${drink.strDrink}"/>
                 <h3>${drink.strDrink}</h3>
                 <p><strong>Category:</strong> ${drink.strCategory}</p>
-                <p><strong>Instructions:</strong> ${drink.strInstructions.slice(1, 30)}</p>
+                <p><strong>Instructions:</strong> ${drink.strInstructions.slice(0, 15)}</p>
                 <div class="buttons d-flex  justify-content-center">
                 <button class="add-to-cart" data-id="${drink.idDrink}">Add to Cart</button>
                 <button class="show-details" data-id="${drink.idDrink}">Show Details</button>
@@ -126,6 +126,10 @@ async function addToCart(drinkId) {
         alert('You can only add up to 7 items to the cart.');
         return;
     }
+    const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = cartList.children.length - 1;
+
+
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`)
     const data = await response.json();
     const drinks = data.drinks;
